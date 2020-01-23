@@ -1,6 +1,9 @@
+import os
 import sys
 
 class BinarySearch:
+
+    ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
 
     @staticmethod
     def index_of(key, lst):
@@ -21,17 +24,25 @@ class BinarySearch:
 
 
 if __name__ == '__main__':
-    with open('num_whitelist.txt') as f:
-        whitelist = [[int(x) for x in line.split()] for line in f]
+    WHITELIST_PATH = os.path.join(BinarySearch.ROOT_PATH, 'libs', 'num_whitelist.txt')
+    INPUT_PATH = os.path.join(BinarySearch.ROOT_PATH, 'libs', sys.argv[1])
+
+    with open(INPUT_PATH) as f:
+        contents = f.read()
+    print(contents)
+
+    with open(WHITELIST_PATH) as f:
+        whitelist_2d = [[int(x) for x in line.split()] for line in f]
+        whitelist = [x for sub_lst in whitelist_2d for x in sub_lst]
 
         whitelist.sort()
 
-        while True:
-            input = int(input())
-            if input == '':
-                break
-            else:
-                key = input
-                if BinarySearch.index_of(key, whitelist) == -1:
-                    print(str(key) + '\n')
+        # while True:
+        #     program_input = int(input())
+        #     if program_input == '':
+        #         break
+        #     else:
+        #         key = program_input
+        #         if BinarySearch.index_of(key, whitelist) == -1:
+        #             print(str(key))
 
